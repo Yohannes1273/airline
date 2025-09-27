@@ -1,0 +1,27 @@
+# Python compiled files
+*.pyc
+__pycache__/
+
+# Virtual environment
+venv/
+env/
+
+# SQLite database
+db.sqlite3
+
+# Django migrations (optional, you may want to keep them)
+*/migrations/*.py
+*/migrations/*.pyc
+
+# Logs
+*.log
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
