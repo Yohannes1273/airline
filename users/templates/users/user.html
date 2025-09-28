@@ -1,0 +1,14 @@
+{% extends "users/layout.html" %} {% block body %}
+<h2>Welcome, {{ request.user.username }}</h2>
+
+<ul>
+  {% for flight in flights %}
+  <li>
+    Flight {{ flight.id }}: {{ flight.orgin }} → {{ flight.destination }} ({{
+    flight.duration }} mins)
+  </li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'logout' %}">Logout</a>
+{% endblock %}
