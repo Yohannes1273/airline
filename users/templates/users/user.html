@@ -1,17 +1,43 @@
-{% extends "users/layout.html" %} {% block body %}
+{% extends "users/layout.html" %} {% block body %} {% load static %}
+<link rel="stylesheet" href="{% static 'users/users.css' %}" />
 
-<h2>Welcome, {{ request.user.username }}</h2>
+<div class="dashboard-container">
+  <header>
+    <h1>Welcome, {{ request.user.username }}</h1>
+    <a href="{% url 'logout' %}" class="btn-logout">Logout</a>
+  </header>
 
-<ul>
-  {% for flight in flights %}
-  <li>
-    Flight {{ flight.id }}: {{ flight.orgin }} → {{ flight.destination }} ({{
-    flight.duration }} mins)
-    <a href="{% url 'flight' flight.id %}">Details</a>
-  </li>
-  {% endfor %}
-</ul>
-
-<a href="{% url 'logout' %}">Logout</a>
+  <section class="flights-list">
+    <h2>Available Flights</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Origin</th>
+          <th>Destination</th>
+          <th>Duration (mins)</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for flight in flights %}
+        <tr>
+          <td>{{ flight.id }}</td>
+          <td>{{ flight.orgin }}</td>
+          <td>{{ flight.destination }}</td>
+          <td>{{ flight.duration }}</td>
+          <td>
+            <a href="{% url 'flight' flight.id %}" class="btn-details">View</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5">No flights available</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</div>
 
 {% endblock %}
